@@ -1,0 +1,590 @@
+➜  one-click git:(main) ✗ poe scrape levay.se
+Poe => uv run scraper/src/scrape.py run levay.se
+[info     ] Found exact match: levay.se
+[info     ] Processing domain: levay.se
+
+📋 Task Overview
+──────────────────────────────────────────────────
+⏰ ScrapeStep
+⏰ DeduplicateStep
+⏰ CleanStep
+⏰ ExtractIframesStep
+⏰ ImageDescriptionsStep
+⏰ ImageRenamingStep
+⏰ ImageAnalysisStep
+⏰ ImageReportStep
+⏰ ExtractNavMenuStep
+⏰ ExtractLanguageStep
+⏰ SEOStep
+⏰ ScreenshotsStep
+⏰ ThemeStep
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 14
+Completed: 0
+
+[info     ] ------- Running step: 🔧 ScrapeStep ⌛ --------
+[info     ] Starting crawl for levay.se with limit 40
+[INIT].... → Crawl4AI 0.7.0
+Crawling URLs: 0it [00:00, ?it/s][FETCH]... ↓ https://levay.se                                                                                     | ✓ | ⏱: 7.75s
+[SCRAPE].. ◆ https://levay.se                                                                                     | ✓ | ⏱: 0.03s
+[COMPLETE] ● https://levay.se                                                                                     | ✓ | ⏱: 7.78s
+[info     ] Redirected from https://levay.se to https://levay.se/
+Crawling URLs: 1it [00:07,  7.79s/it]
+Downloading images: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  1.55it/s]
+Downloading images: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  2.04it/s]
+✅ Step ScrapeStep completed
+
+📋 Task Overview
+──────────────────────────────────────────────────
+✅ ScrapeStep (completed)
+⏰ DeduplicateStep
+⏰ CleanStep
+⏰ ExtractIframesStep
+⏰ ImageDescriptionsStep
+⏰ ImageRenamingStep
+⏰ ImageAnalysisStep
+⏰ ImageReportStep
+⏰ ExtractNavMenuStep
+⏰ ExtractLanguageStep
+⏰ SEOStep
+⏰ ScreenshotsStep
+⏰ ThemeStep
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 13
+Completed: 1
+
+[info     ] ------- Running step: 🔧 DeduplicateStep ⌛ --------
+Grouping similar images: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 59074.70it/s]
+[info     ] Deduplicated 0 duplicates from 1 images
+✅ Step DeduplicateStep completed
+
+📋 Task Overview
+──────────────────────────────────────────────────
+✅ ScrapeStep (completed)
+✅ DeduplicateStep (completed)
+⏰ CleanStep
+⏰ ExtractIframesStep
+⏰ ImageDescriptionsStep
+⏰ ImageRenamingStep
+⏰ ImageAnalysisStep
+⏰ ImageReportStep
+⏰ ExtractNavMenuStep
+⏰ ExtractLanguageStep
+⏰ SEOStep
+⏰ ScreenshotsStep
+⏰ ThemeStep
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 12
+Completed: 2
+
+[info     ] ------- Running step: 🔧 CleanStep ⌛ --------
+[error    ] Unexpected error formatting HTML files with Prettier error="[Errno 2] No such file or directory: 'prettier'" folder_path=PosixPath('/Users/ludvigsvedberg/Programming/one-click/scraper/results/levay.se/cleaned-html')
+✅ Step CleanStep completed
+
+📋 Task Overview
+──────────────────────────────────────────────────
+✅ ScrapeStep (completed)
+✅ DeduplicateStep (completed)
+✅ CleanStep (completed)
+⏰ ExtractIframesStep
+⏰ ImageDescriptionsStep
+⏰ ImageRenamingStep
+⏰ ImageAnalysisStep
+⏰ ImageReportStep
+⏰ ExtractNavMenuStep
+⏰ ExtractLanguageStep
+⏰ SEOStep
+⏰ ScreenshotsStep
+⏰ ThemeStep
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 11
+Completed: 3
+
+[info     ] ------- Running step: 🔧 ExtractIframesStep ⌛ --------
+
+Extracting iframes for index
+- Found 0 iframes
+✅ Step ExtractIframesStep completed
+
+📋 Task Overview
+──────────────────────────────────────────────────
+✅ ScrapeStep (completed)
+✅ DeduplicateStep (completed)
+✅ CleanStep (completed)
+✅ ExtractIframesStep (completed)
+⏰ ImageDescriptionsStep
+⏰ ImageRenamingStep
+⏰ ImageAnalysisStep
+⏰ ImageReportStep
+⏰ ExtractNavMenuStep
+⏰ ExtractLanguageStep
+⏰ SEOStep
+⏰ ScreenshotsStep
+⏰ ThemeStep
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 10
+Completed: 4
+
+[info     ] ------- Running step: 🔧 ImageDescriptionsStep ⌛ --------
+Generating image descriptions: 0it [00:00, ?it/s][info     ] Found 1 images to score.
+Generating image descriptions: 1it [00:11, 11.01s/it]
+✅ Step ImageDescriptionsStep completed
+
+📋 Task Overview
+──────────────────────────────────────────────────
+✅ ScrapeStep (completed)
+✅ DeduplicateStep (completed)
+✅ CleanStep (completed)
+✅ ExtractIframesStep (completed)
+✅ ImageDescriptionsStep (completed)
+⏰ ImageRenamingStep
+⏰ ImageAnalysisStep
+⏰ ImageReportStep
+⏰ ExtractNavMenuStep
+⏰ ExtractLanguageStep
+⏰ SEOStep
+⏰ ScreenshotsStep
+⏰ ThemeStep
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 9
+Completed: 5
+
+[info     ] ------- Running step: 🔧 ImageRenamingStep ⌛ --------
+Renaming images:   0%|                                                                                                                                              | 0/1 [00:00<?, ?it/s]photo-1620712943543-bcc4688e7485.jpg
+  ↳ robot_sitting_on_bench.jpg
+Renaming images: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 162.95it/s]
+Renamed 1 images
+✅ Step ImageRenamingStep completed
+
+📋 Task Overview
+──────────────────────────────────────────────────
+✅ ScrapeStep (completed)
+✅ DeduplicateStep (completed)
+✅ CleanStep (completed)
+✅ ExtractIframesStep (completed)
+✅ ImageDescriptionsStep (completed)
+✅ ImageRenamingStep (completed)
+⏰ ImageAnalysisStep
+⏰ ImageReportStep
+⏰ ExtractNavMenuStep
+⏰ ExtractLanguageStep
+⏰ SEOStep
+⏰ ScreenshotsStep
+⏰ ThemeStep
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 8
+Completed: 6
+
+[info     ] ------- Running step: 🔧 ImageAnalysisStep ⌛ --------
+[info     ] Analyzing 1 images with improved algorithms...
+Analyzing images:   0%|                                                                                                                                             | 0/1 [00:00<?, ?it/s]Analyzing robot_sitting_on_bench.jpg
+Analyzing images: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  4.88it/s]
+[info     ] Image analysis complete: 1 successful, 0 failed
+✅ Step ImageAnalysisStep completed
+
+📋 Task Overview
+──────────────────────────────────────────────────
+✅ ScrapeStep (completed)
+✅ DeduplicateStep (completed)
+✅ CleanStep (completed)
+✅ ExtractIframesStep (completed)
+✅ ImageDescriptionsStep (completed)
+✅ ImageRenamingStep (completed)
+✅ ImageAnalysisStep (completed)
+⏰ ImageReportStep
+⏰ ExtractNavMenuStep
+⏰ ExtractLanguageStep
+⏰ SEOStep
+⏰ ScreenshotsStep
+⏰ ThemeStep
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 7
+Completed: 7
+
+[info     ] ------- Running step: 🔧 ImageReportStep ⌛ --------
+[info     ] Generating image analytics report for levay.se
+[info     ] Generated image analytics report: /Users/ludvigsvedberg/Programming/one-click/scraper/results/levay.se/image_analytics_report.html
+[info     ] ✅ Image analytics report generated: /Users/ludvigsvedberg/Programming/one-click/scraper/results/levay.se/image_analytics_report.html
+✅ Step ImageReportStep completed
+
+📋 Task Overview
+──────────────────────────────────────────────────
+✅ ScrapeStep (completed)
+✅ DeduplicateStep (completed)
+✅ CleanStep (completed)
+✅ ExtractIframesStep (completed)
+✅ ImageDescriptionsStep (completed)
+✅ ImageRenamingStep (completed)
+✅ ImageAnalysisStep (completed)
+✅ ImageReportStep (completed)
+⏰ ExtractNavMenuStep
+⏰ ExtractLanguageStep
+⏰ SEOStep
+⏰ ScreenshotsStep
+⏰ ThemeStep
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 6
+Completed: 8
+
+[info     ] ------- Running step: 🔧 ExtractNavMenuStep ⌛ --------
+Extracting navigation elements from index page: index
+Successfully extracted 10 navigation elements
+{
+  "src": "../images/ext-custom-logo-1749102053958.webp",
+  "alt": "",
+  "href": "index"
+}
+{
+  "text": "Levay Multimedia",
+  "href": "index"
+}
+{
+  "text": "Om oss",
+  "href": "index"
+}
+{
+  "text": "Funktioner",
+  "href": "index"
+}
+{
+  "text": "Kundomdömen",
+  "href": "index"
+}
+{
+  "text": "Tjänster",
+  "href": "index"
+}
+{
+  "text": "Kontakt",
+  "href": "index"
+}
+{
+  "text": "Instagram",
+  "href": "https://www.instagram.com/"
+}
+{
+  "text": "Facebook",
+  "href": "https://www.facebook.com/"
+}
+{
+  "text": "X",
+  "href": "https://x.com/"
+}
+✅ Step ExtractNavMenuStep completed
+
+📋 Task Overview
+──────────────────────────────────────────────────
+✅ ScrapeStep (completed)
+✅ DeduplicateStep (completed)
+✅ CleanStep (completed)
+✅ ExtractIframesStep (completed)
+✅ ImageDescriptionsStep (completed)
+✅ ImageRenamingStep (completed)
+✅ ImageAnalysisStep (completed)
+✅ ImageReportStep (completed)
+✅ ExtractNavMenuStep (completed)
+⏰ ExtractLanguageStep
+⏰ SEOStep
+⏰ ScreenshotsStep
+⏰ ThemeStep
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 5
+Completed: 9
+
+[info     ] ------- Running step: 🔧 ExtractLanguageStep ⌛ --------
+Extracting language information from 1 pages
+Processing page: index
+Index page main language: sv
+Successfully processed 1 pages. Main language: sv, Total languages found: 1
+Main language: sv
+No additional languages found
+✅ Step ExtractLanguageStep completed
+
+📋 Task Overview
+──────────────────────────────────────────────────
+✅ ScrapeStep (completed)
+✅ DeduplicateStep (completed)
+✅ CleanStep (completed)
+✅ ExtractIframesStep (completed)
+✅ ImageDescriptionsStep (completed)
+✅ ImageRenamingStep (completed)
+✅ ImageAnalysisStep (completed)
+✅ ImageReportStep (completed)
+✅ ExtractNavMenuStep (completed)
+✅ ExtractLanguageStep (completed)
+⏰ SEOStep
+⏰ ScreenshotsStep
+⏰ ThemeStep
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 4
+Completed: 10
+
+[info     ] ------- Running step: 🔧 SEOStep ⌛ --------
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 60.06it/s]
+✅ Step SEOStep completed
+
+📋 Task Overview
+──────────────────────────────────────────────────
+✅ ScrapeStep (completed)
+✅ DeduplicateStep (completed)
+✅ CleanStep (completed)
+✅ ExtractIframesStep (completed)
+✅ ImageDescriptionsStep (completed)
+✅ ImageRenamingStep (completed)
+✅ ImageAnalysisStep (completed)
+✅ ImageReportStep (completed)
+✅ ExtractNavMenuStep (completed)
+✅ ExtractLanguageStep (completed)
+✅ SEOStep (completed)
+⏰ ScreenshotsStep
+⏰ ThemeStep
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 3
+Completed: 11
+
+[info     ] ------- Running step: 🔧 ScreenshotsStep ⌛ --------
+[info     ]
+Processing URL: index
+✅ Step ScreenshotsStep completed
+
+📋 Task Overview
+──────────────────────────────────────────────────
+✅ ScrapeStep (completed)
+✅ DeduplicateStep (completed)
+✅ CleanStep (completed)
+✅ ExtractIframesStep (completed)
+✅ ImageDescriptionsStep (completed)
+✅ ImageRenamingStep (completed)
+✅ ImageAnalysisStep (completed)
+✅ ImageReportStep (completed)
+✅ ExtractNavMenuStep (completed)
+✅ ExtractLanguageStep (completed)
+✅ SEOStep (completed)
+✅ ScreenshotsStep (completed)
+⏰ ThemeStep
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 2
+Completed: 12
+
+[info     ] ------- Running step: 🔧 ThemeStep ⌛ --------
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  3.18it/s]
+Accents: [
+  (hsl: 1.0 0.6% 1.0%, samples: 0.0%)
+], Darks: [
+  (hsl: 0.0 0.0% 0.0%, samples: 0.8%)
+], Lights: [
+  (hsl: 0.0 1.0% 0.0%, samples: 98.6%)
+]
+✅ Step ThemeStep completed
+
+📋 Task Overview
+──────────────────────────────────────────────────
+✅ ScrapeStep (completed)
+✅ DeduplicateStep (completed)
+✅ CleanStep (completed)
+✅ ExtractIframesStep (completed)
+✅ ImageDescriptionsStep (completed)
+✅ ImageRenamingStep (completed)
+✅ ImageAnalysisStep (completed)
+✅ ImageReportStep (completed)
+✅ ExtractNavMenuStep (completed)
+✅ ExtractLanguageStep (completed)
+✅ SEOStep (completed)
+✅ ScreenshotsStep (completed)
+✅ ThemeStep (completed)
+⏰ SummaryStep
+──────────────────────────────────────────────────
+Domain: levay.se
+Tasks to run: 1
+Completed: 13
+
+[info     ] ------- Running step: 🔧 SummaryStep ⌛ --------
+<URL>
+https://levay.se
+</URL>
+<AVAILABLE_PATHS>
+['Index']
+
+</AVAILABLE_PATHS>
+<CLEANED_HTML>
+<a href="#wp--skip-link--target">Hoppa till innehåll</a>
+<div>
+<a href="index">
+<img src="../images/ext-custom-logo-1749102053958.webp"/></a>
+<h1>
+<a href="index">Levay Multimedia</a>
+</h1>
+<ul>
+<li>
+<a href="index"> Om oss </a>
+</li>
+<li>
+<a href="index"> Funktioner </a>
+</li>
+<li>
+<a href="index"> Kundomdömen </a>
+</li>
+<li>
+<a href="index"> Tjänster </a>
+</li>
+<li>
+<a href="index"> Kontakt </a>
+</li>
+</ul>
+<ul>
+<li>
+<a href="https://www.instagram.com/"> Instagram </a>
+</li>
+<li>
+<a href="https://www.facebook.com/"> Facebook </a>
+</li>
+<li>
+<a href="https://x.com/"> X </a>
+</li>
+</ul>
+<img src="../images/photo-1620712943543-bcc4688e7485"/>
+<h1>Upptäck AI-kurser utformade för både nybörjare och experter</h1>
+<p>Levay Multimedia erbjuder insiktsfulla AI-utbildningar som stärker dina färdigheter och driver din utveckling framåt. Lita på vår expertis för att förvandla dina idéer till
+verklighet.</p>
+<a href="index">Läs mer</a>
+<h2>Upptäck AI-kunskaper med Levay Multimedia</h2>
+<p>Levay Multimedia erbjuder expertutbildning inom artificiell intelligens, med fokus på praktiska och teoretiska kunskaper som stärker både användare och tekniker i deras
+utveckling.</p>
+<p>Vi erbjuder skräddarsydda AI-kurser och tjänster som kombinerar djup kunskap med verklig användbarhet för alla nivåer.</p>
+<h2>Lär dig AI med Levay Multimedia</h2>
+<p>Upptäck våra kurser som kombinerar teori och praktik.</p>
+<h3>Praktiska AI-kurser</h3>
+<p>Få djupgående insikter i artificiell intelligens.</p>
+<h3>Tekniska lösningar</h3>
+<p>Bygg din AI-kompetens med våra expertledda kurser.</p>
+<h3>Kurs för användare</h3>
+<p>Lär dig använda AI-verktyg smart och effektivt.</p>
+<h3>Onlinekurser</h3>
+<p>Studera i din egen takt med våra flexibla kurser.</p>
+<h2>Upptäck AI-kurser anpassade för både nybörjare och experter</h2>
+<p>Här delar våra deltagare sina positiva erfarenheter av Levay Multimedia och hur våra AI-kurser förändrat deras kompetenser.</p>
+<p>Efter att ha genomgått kursen kan jag intyga att insikterna och stödet från Levay Multimedia är oslagbara.</p>
+<img src="../images/photo-1525134479668-1bee5c7c6845"/>
+<h4>Anna Svensson</h4>
+<p>Dataanalytiker</p>
+<p>Levay Multimedia levererar kurser med hög kvalitet och en pedagogik som gör AI begripligt och tillämpbart.</p>
+<img src="../images/photo-1593757147298-e064ed1419e5"/>
+<h4>Erik Lindström</h4>
+<p>AI-utvecklare</p>
+<p>Jag är mycket nöjd med kursupplägget och den personliga supporten från teamet på Levay Multimedia.</p>
+<img src="../images/photo-1614204424926-196a80bf0be8"/>
+<h4>Sara Nilsson</h4>
+<p>Teknisk konsult</p>
+<img src="../images/photo-1620712943543-bcc4688e7485"/>
+<h2>Lär dig AI från experter</h2>
+<p>Gå med i vårt AI-nätverk för nyheter och exklusiva kurser</p>
+<a href="index">Upptäck mer</a>
+<h2>Utforska AI-kurser med Levay Multimedia</h2>
+<p>Upptäck vårt breda kursutbud inom AI, där både teori och praktik står i fokus för din utveckling.</p>
+<h3>Grundkurs i AI</h3>
+<p>En kurs som ger dig både grundläggande och praktiska kunskaper i artificiell intelligens.</p>
+<h3>Teknisk AI-utbildning</h3>
+<p>Specialanpassad utbildning för tekniker som vill fördjupa sina AI-färdigheter.</p>
+<h3>AI för användare</h3>
+<p>Praktisk kurs för användare som vill effektivt använda AI i vardagen.</p>
+<img src="../images/photo-1534723328310-e82dad3ee43f"/>
+<h2>Lär dig grunderna i artificiell intelligens</h2>
+<p>Här hittar du kontaktuppgifter för Levay Multimedia, inklusive e-post och telefon, för snabb support.</p>
+<form>
+<div>Aktivera JavaScript i din webbläsare för att fylla i formuläret.</div>
+<div> Meddelande Namn Namn
+<input/>
+<input/> Namn *
+<input/> E-post *
+<input/> Ämne
+<input/> Meddelande * </div>
+<!-- .wpforms-field-container -->
+<div>
+<input/>
+<input/>
+<input/>
+<input/>
+<input/>
+<input/>
+<button>Skicka</button>
+<img src="../images/submit-spin.svg"/></div>
+</form>
+<!-- .wpforms-container -->
+<a href="index">
+<img src="../images/ext-custom-logo-1749102053958.webp"/></a>
+<h1>
+<a href="index">Levay Multimedia</a>
+</h1>
+<ul>
+<li>
+<a href="https://www.instagram.com/"> Instagram </a>
+</li>
+<li>
+<a href="https://www.facebook.com/"> Facebook </a>
+</li>
+<li>
+<a href="https://x.com/"> X </a>
+</li>
+</ul>
+</div>
+</CLEANED_HTML>
+<EXTRACTED_COLOURS>
+Accents: [
+  (hsl: 1.0 0.6% 1.0%, samples: 0.0%)
+], Darks: [
+  (hsl: 0.0 0.0% 0.0%, samples: 0.8%)
+], Lights: [
+  (hsl: 0.0 1.0% 0.0%, samples: 98.6%)
+]
+</EXTRACTED_COLOURS>
+<MOBILE_SCREENSHOT>
+<class 'pydantic_ai.messages.BinaryContent'> image/jpeg
+</MOBILE_SCREENSHOT>
+<DESKTOP_SCREENSHOT>
+<class 'pydantic_ai.messages.BinaryContent'> image/jpeg
+</DESKTOP_SCREENSHOT>
+PageSummary(
+    name='Levay Multimedia',
+    description='Levay Multimedia är en utbildningsverksamhet med fokus på att erbjuda insiktsfulla och tillgängliga kurser inom artificiell intelligens. Vi riktar oss till allt från
+nybörjare till experter och erbjuder både teoretiska och praktiska AI-kurser och tjänster, samt support och nätverkande. Syftet med vår webbplats är att presentera våra utbildningar,
+dela kundomdömen, och underlätta kontakten med både nya och befintliga kunder.',
+    feelings=['Förtroende', 'Inspiration', 'Framåttänkande', 'Professionalism', 'Tillgänglighet', 'Trygghet'],
+    proposed_colours=ProposedColours(
+        colours=[
+            Colour(h=350.0, s=70.0, l=52.0, comment='En varm magenta/röd ton (i linje med nuvarande logotyp) skapar energi, framtidstro och distinkt identitet för AI och utbildning.'),
+            Colour(h=220.0, s=15.0, l=12.0, comment='En mycket mörkblå nästan svart - bättre än helt svart, ger djup och grundar sidan, fungerar utmärkt för text.'),
+            Colour(h=0.0, s=0.0, l=98.0, comment='Mycket ljus gråvit bakgrund – bevarar tydlighet och modernitet, samtidigt mer behagligt för ögat än helt vit bakgrund.'),
+            Colour(h=137.0, s=25.0, l=42.0, comment='En dämpad teal/grön accent för att bryta av och lyfta viktiga element som knappar, länkar eller call-to-action.')
+        ]
+    )
+)
+[info     ] Usage: Usage(requests=1, request_tokens=3478, response_tokens=445, total_tokens=3923, details={'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0, 'cached_tokens': 0})
+[info     ] Cost: $0.0105160000
+<class 'oneclicklib.types.PageSummary'>
+✅ Step SummaryStep completed

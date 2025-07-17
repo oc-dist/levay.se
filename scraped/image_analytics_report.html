@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Analytics Report - levay.se</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #3b82f6;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        .summary {
+            color: #059669;
+            font-size: 1.1rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 150px;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.875rem;
+        }
+
+        .column-selector-btn {
+            padding: 0.75rem 1rem;
+            background: #059669;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-top: 1.5rem; /* Align with other filter inputs */
+        }
+
+        .column-selector-btn:hover {
+            background: #047857;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1200px;
+        }
+
+        /* Column visibility */
+        .column-hidden {
+            display: none !important;
+        }
+
+        /* Column selection modal */
+        .column-modal {
+            max-width: 500px;
+            min-height: auto;
+        }
+
+        .column-checkboxes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .column-checkboxes label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .column-checkboxes label:hover {
+            background: #f8fafc;
+        }
+
+        .column-checkboxes input[type="checkbox"] {
+            margin: 0;
+        }
+
+        .column-checkboxes input[type="checkbox"]:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        .modal-actions button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .modal-actions button:first-child {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .modal-actions button:first-child:hover {
+            background: #2563eb;
+        }
+
+        .modal-actions button:last-child {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .modal-actions button:last-child:hover {
+            background: #e5e7eb;
+        }
+
+        thead {
+            background: #f1f5f9;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        .main-row {
+            height: auto;
+            min-height: 120px;
+        }
+
+        th.sortable {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        th.sortable:hover {
+            background: #e2e8f0;
+        }
+
+                .image-cell {
+            min-width: 400px;
+            max-width: 500px;
+        }
+
+        .image-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            flex-shrink: 0;
+        }
+
+        .thumbnail.clickable {
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .thumbnail.clickable:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .image-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            flex: 1;
+        }
+
+        .image-details small {
+            color: #6b7280;
+            font-size: 0.75rem;
+        }
+
+        .visual-description {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: #f8fafc;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .visual-name {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .visual-desc {
+            color: #374151;
+            margin-bottom: 0.25rem;
+        }
+
+        .visual-purpose {
+            color: #6b7280;
+            font-style: italic;
+            margin-bottom: 0.25rem;
+        }
+
+        .visual-score-basis {
+            color: #374151;
+            margin-bottom: 0.25rem;
+        }
+
+        .visual-feelings {
+            color: #8b5cf6;
+            font-size: 0.7rem;
+            font-style: italic;
+        }
+
+        .ocr-text {
+            font-style: italic;
+            color: #8b5cf6 !important;
+        }
+
+        .quality-score {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .quality-high { background: #059669; }
+        .quality-medium { background: #d97706; }
+        .quality-low { background: #dc2626; }
+
+        .blur-category {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .blur-clear { background: #d1fae5; color: #065f46; }
+        .blur-slight { background: #fef3c7; color: #92400e; }
+        .blur-partial { background: #fed7aa; color: #9a3412; }
+        .blur-very { background: #fecaca; color: #991b1b; }
+        .blur-unknown { background: #f3f4f6; color: #374151; }
+
+        .details-btn, .expand-btn {
+            padding: 0.5rem 1rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+        }
+
+        .details-btn:hover, .expand-btn:hover {
+            background: #2563eb;
+        }
+
+        .expand-btn {
+            padding: 0.5rem 0.75rem;
+            background: #6b7280;
+            font-size: 0.75rem;
+            min-width: 2rem;
+        }
+
+        .expand-btn:hover {
+            background: #4b5563;
+        }
+
+        .detail-row {
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .detail-cell {
+            padding: 0 !important;
+        }
+
+        .detail-content {
+            padding: 1.5rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .detail-section {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .detail-section h4 {
+            margin-bottom: 1rem;
+            color: #1e293b;
+            font-size: 1.1rem;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.5rem;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        .detail-grid div {
+            padding: 0.5rem;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .detail-grid strong {
+            color: #374151;
+        }
+
+        .analytics-summary {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .summary-card {
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .summary-card h4 {
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 2% auto;
+            padding: 20px;
+            max-width: 90%;
+            max-height: 90%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #999;
+            z-index: 1001;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        #modalImage {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        #modalImageInfo {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #modalImageName {
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        #modalImageAlt {
+            color: #6b7280;
+            margin: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .table-container {
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 800px;
+            }
+        }
+    </style>
+        
+    
+    <script>
+        let currentSort = { column: null, direction: 'asc' };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setupSorting();
+            setupFiltering();
+            generateCharts();
+            setupModalKeyboardHandlers();
+            setupColumnSelection();
+            loadColumnSettings();
+        });
+
+        function setupModalKeyboardHandlers() {
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeImageModal();
+                }
+            });
+        }
+
+        function openImageModal(imageSrc, imageName, imageAlt) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalImageName = document.getElementById('modalImageName');
+            const modalImageAlt = document.getElementById('modalImageAlt');
+
+            modalImage.src = imageSrc;
+            modalImage.alt = imageAlt;
+            modalImageName.textContent = imageName;
+            modalImageAlt.textContent = imageAlt;
+
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable background scrolling
+        }
+
+        // Close modal when clicking outside the image
+        document.addEventListener('click', function(event) {
+            const imageModal = document.getElementById('imageModal');
+            const columnModal = document.getElementById('columnModal');
+
+            if (event.target === imageModal) {
+                closeImageModal();
+            }
+
+            if (event.target === columnModal) {
+                closeColumnModal();
+            }
+        });
+
+        function setupSorting() {
+            document.querySelectorAll('.sortable').forEach(header => {
+                header.addEventListener('click', () => {
+                    const column = header.dataset.sort;
+                    sortTable(column);
+                });
+            });
+        }
+
+        function sortTable(column) {
+            const table = document.getElementById('imagesTable');
+            const tbody = table.querySelector('tbody');
+            const mainRows = Array.from(tbody.querySelectorAll('tr.main-row'));
+
+            // Update sort direction
+            if (currentSort.column === column) {
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSort.column = column;
+                currentSort.direction = 'asc';
+            }
+
+            // Sort main rows
+            mainRows.sort((a, b) => {
+                const aValue = getColumnValue(a, column);
+                const bValue = getColumnValue(b, column);
+
+                if (typeof aValue === 'number' && typeof bValue === 'number') {
+                    return currentSort.direction === 'asc' ? aValue - bValue : bValue - aValue;
+                } else {
+                    const aStr = String(aValue).toLowerCase();
+                    const bStr = String(bValue).toLowerCase();
+                    if (currentSort.direction === 'asc') {
+                        return aStr.localeCompare(bStr);
+                    } else {
+                        return bStr.localeCompare(aStr);
+                    }
+                }
+            });
+
+            // Update table - append main row and its corresponding detail row
+            mainRows.forEach((mainRow, index) => {
+                tbody.appendChild(mainRow);
+                const detailRow = document.getElementById(`detail-${index}`);
+                if (detailRow) {
+                    tbody.appendChild(detailRow);
+                }
+            });
+
+            // Update header indicators
+            updateSortIndicators(column);
+        }
+
+        function getColumnValue(row, column) {
+            const cells = row.children;
+            switch(column) {
+                case 'name': return cells[0].textContent.trim();
+                case 'quality_score': return parseFloat(cells[1].textContent);
+                case 'visual_score': return parseFloat(cells[2].textContent);
+                case 'sharpness': return parseFloat(cells[3].textContent);
+                case 'blur_category': return cells[4].textContent.trim();
+                case 'face_count': return parseInt(cells[5].textContent);
+                case 'resolution': return parseInt(row.dataset.resolution || 0); // Sort by total pixels
+                case 'aspect_ratio': return parseFloat(cells[7].textContent);
+                case 'brightness': return parseFloat(cells[8].textContent);
+                case 'contrast': return parseFloat(cells[9].textContent);
+                case 'dominant_color_percentage': return parseFloat(cells[10].textContent);
+                case 'file_size': return parseFloat(cells[11].textContent);
+                default: return '';
+            }
+        }
+
+        function updateSortIndicators(activeColumn) {
+            document.querySelectorAll('.sortable').forEach(header => {
+                header.style.background = '';
+                const column = header.dataset.sort;
+                if (column === activeColumn) {
+                    header.style.background = '#e2e8f0';
+                    header.textContent = header.textContent.replace(' ↑', '').replace(' ↓', '');
+                    header.textContent += currentSort.direction === 'asc' ? ' ↑' : ' ↓';
+                } else {
+                    header.textContent = header.textContent.replace(' ↑', '').replace(' ↓', '');
+                }
+            });
+        }
+
+        function setupFiltering() {
+            const searchInput = document.getElementById('search');
+            const qualityFilter = document.getElementById('quality-filter');
+            const blurFilter = document.getElementById('blur-filter');
+            const facesFilter = document.getElementById('faces-filter');
+
+            [searchInput, qualityFilter, blurFilter, facesFilter].forEach(element => {
+                element.addEventListener('input', filterTable);
+            });
+        }
+
+        function filterTable() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const qualityFilter = document.getElementById('quality-filter').value;
+            const blurFilter = document.getElementById('blur-filter').value;
+            const facesFilter = document.getElementById('faces-filter').value;
+
+            const mainRows = document.querySelectorAll('#imagesTable tbody tr.main-row');
+
+            mainRows.forEach((row, index) => {
+                let show = true;
+
+                // Search filter
+                if (searchTerm) {
+                    const searchData = row.dataset.search.toLowerCase();
+                    if (!searchData.includes(searchTerm)) {
+                        show = false;
+                    }
+                }
+
+                // Quality filter
+                if (qualityFilter && show) {
+                    const quality = parseFloat(row.dataset.quality);
+                    if (qualityFilter === 'high' && quality < 7) show = false;
+                    if (qualityFilter === 'medium' && (quality < 4 || quality >= 7)) show = false;
+                    if (qualityFilter === 'low' && quality >= 4) show = false;
+                }
+
+                // Blur filter
+                if (blurFilter && show) {
+                    const blur = row.dataset.blur;
+                    if (blurFilter === 'clear' && !blur.includes('clear')) show = false;
+                    if (blurFilter === 'slightly' && !blur.includes('slightly')) show = false;
+                    if (blurFilter === 'partially' && !blur.includes('partially')) show = false;
+                    if (blurFilter === 'very' && !blur.includes('very')) show = false;
+                }
+
+                // Faces filter
+                if (facesFilter && show) {
+                    const faces = parseInt(row.dataset.faces);
+                    if (facesFilter === 'yes' && faces === 0) show = false;
+                    if (facesFilter === 'no' && faces > 0) show = false;
+                }
+
+                // Show/hide main row and its corresponding detail row
+                row.classList.toggle('hidden', !show);
+                const detailRow = document.getElementById(`detail-${index}`);
+                if (detailRow) {
+                    detailRow.classList.toggle('hidden', !show);
+                }
+            });
+        }
+
+        function toggleDetails(index) {
+            const detailRow = document.getElementById(`detail-${index}`);
+            const expandBtn = document.querySelector(`[onclick="toggleDetails(${index})"]`);
+
+            if (detailRow) {
+                const isVisible = detailRow.style.display !== 'none';
+                detailRow.style.display = isVisible ? 'none' : 'table-row';
+                expandBtn.textContent = isVisible ? '▼' : '▲';
+
+                // Update colspan based on visible columns
+                const visibleColumns = document.querySelectorAll('th:not(.column-hidden)').length;
+                const detailCell = detailRow.querySelector('.detail-cell');
+                if (detailCell) {
+                    detailCell.setAttribute('colspan', visibleColumns);
+                }
+            }
+        }
+
+        function generateCharts() {
+            // Simple text-based charts for now
+            generateQualityChart();
+            generateBlurChart();
+            generateFaceChart();
+        }
+
+        function generateQualityChart() {
+            const qualityChart = document.getElementById('qualityChart');
+
+            // Analysis Score
+            const analysisHigh = imagesData.filter(img => img.quality_score >= 7).length;
+            const analysisMedium = imagesData.filter(img => img.quality_score >= 4 && img.quality_score < 7).length;
+            const analysisLow = imagesData.filter(img => img.quality_score < 4).length;
+
+            // Visual Score (LLM)
+            const visualHigh = imagesData.filter(img => img.visual_score >= 7).length;
+            const visualMedium = imagesData.filter(img => img.visual_score >= 4 && img.visual_score < 7).length;
+            const visualLow = imagesData.filter(img => img.visual_score < 4).length;
+
+            qualityChart.innerHTML = `
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div>
+                        <strong>Analysis Score:</strong>
+                        <div style="margin-left: 1rem;">
+                            <div>High (≥7): <strong>${analysisHigh}</strong></div>
+                            <div>Medium (4-7): <strong>${analysisMedium}</strong></div>
+                            <div>Low (<4): <strong>${analysisLow}</strong></div>
+                        </div>
+                    </div>
+                    <div>
+                        <strong>LLM Score:</strong>
+                        <div style="margin-left: 1rem;">
+                            <div>High (≥7): <strong>${visualHigh}</strong></div>
+                            <div>Medium (4-7): <strong>${visualMedium}</strong></div>
+                            <div>Low (<4): <strong>${visualLow}</strong></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateBlurChart() {
+            const blurChart = document.getElementById('blurChart');
+            const clear = imagesData.filter(img => img.blur_category.toLowerCase().includes('clear')).length;
+            const slight = imagesData.filter(img => img.blur_category.toLowerCase().includes('slightly')).length;
+            const partial = imagesData.filter(img => img.blur_category.toLowerCase().includes('partially')).length;
+            const very = imagesData.filter(img => img.blur_category.toLowerCase().includes('very')).length;
+
+            blurChart.innerHTML = `
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div>Clear: <strong>${clear}</strong></div>
+                    <div>Slightly Blurry: <strong>${slight}</strong></div>
+                    <div>Partially Blurry: <strong>${partial}</strong></div>
+                    <div>Very Blurry: <strong>${very}</strong></div>
+                </div>
+            `;
+        }
+
+        function generateFaceChart() {
+            const faceChart = document.getElementById('faceChart');
+            const withFaces = imagesData.filter(img => img.has_faces).length;
+            const withoutFaces = imagesData.filter(img => !img.has_faces).length;
+            const portraits = imagesData.filter(img => img.is_monochrome).length; // Changed from is_portrait to is_monochrome
+
+            faceChart.innerHTML = `
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div>With Faces: <strong>${withFaces}</strong></div>
+                    <div>Without Faces: <strong>${withoutFaces}</strong></div>
+                    <div>Portraits: <strong>${portraits}</strong></div>
+                </div>
+            `;
+        }
+
+        function setupColumnSelection() {
+            const columnBtn = document.getElementById('column-selector-btn');
+            columnBtn.addEventListener('click', openColumnModal);
+        }
+
+        function openColumnModal() {
+            const modal = document.getElementById('columnModal');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeColumnModal() {
+            const modal = document.getElementById('columnModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function applyColumnSelection() {
+            const checkboxes = document.querySelectorAll('.column-checkboxes input[type="checkbox"]');
+            const visibleColumns = [];
+
+            checkboxes.forEach(checkbox => {
+                const column = checkbox.value;
+                const isVisible = checkbox.checked;
+
+                // Update column visibility
+                const headers = document.querySelectorAll(`th[data-column="${column}"]`);
+                const cells = document.querySelectorAll(`td[data-column="${column}"]`);
+
+                headers.forEach(header => {
+                    header.classList.toggle('column-hidden', !isVisible);
+                });
+
+                cells.forEach(cell => {
+                    cell.classList.toggle('column-hidden', !isVisible);
+                });
+
+                if (isVisible) {
+                    visibleColumns.push(column);
+                }
+            });
+
+            // Save to localStorage
+            localStorage.setItem('imageReportColumns', JSON.stringify(visibleColumns));
+
+            closeColumnModal();
+        }
+
+        function resetColumnSelection() {
+            // Reset to default columns
+            const defaultColumns = ['image', 'quality_score', 'visual_score', 'blur_category', 'file_size', 'actions'];
+
+            const checkboxes = document.querySelectorAll('.column-checkboxes input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = defaultColumns.includes(checkbox.value) || checkbox.disabled;
+            });
+
+            applyColumnSelection();
+        }
+
+        function loadColumnSettings() {
+            const savedColumns = localStorage.getItem('imageReportColumns');
+            if (savedColumns) {
+                const visibleColumns = JSON.parse(savedColumns);
+
+                // Update checkboxes
+                const checkboxes = document.querySelectorAll('.column-checkboxes input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    if (!checkbox.disabled) {
+                        checkbox.checked = visibleColumns.includes(checkbox.value);
+                    }
+                });
+
+                // Apply column visibility
+                const allColumns = ['image', 'quality_score', 'visual_score', 'sharpness', 'blur_category', 'face_count', 'resolution', 'aspect_ratio', 'brightness', 'contrast', 'dominant_color_percentage', 'file_size', 'actions'];
+
+                allColumns.forEach(column => {
+                    const isVisible = visibleColumns.includes(column);
+                    const headers = document.querySelectorAll(`th[data-column="${column}"]`);
+                    const cells = document.querySelectorAll(`td[data-column="${column}"]`);
+
+                    headers.forEach(header => {
+                        header.classList.toggle('column-hidden', !isVisible);
+                    });
+
+                    cells.forEach(cell => {
+                        cell.classList.toggle('column-hidden', !isVisible);
+                    });
+                });
+            }
+        }
+    </script>
+        
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Image Analytics Report</h1>
+            <h2>levay.se</h2>
+            <p class="subtitle">Generated on 2025-07-17 09:26:34</p>
+            <p class="summary">Total Images: <strong>1</strong></p>
+        </header>
+
+        <div class="controls">
+            <div class="filter-group">
+                <label for="search">Search:</label>
+                <input type="text" id="search" placeholder="Filter by name, description, or text...">
+            </div>
+            <div class="filter-group">
+                <label for="quality-filter">Quality:</label>
+                <select id="quality-filter">
+                    <option value="">All</option>
+                    <option value="high">High (>7)</option>
+                    <option value="medium">Medium (4-7)</option>
+                    <option value="low">Low (<4)</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="blur-filter">Blur:</label>
+                <select id="blur-filter">
+                    <option value="">All</option>
+                    <option value="clear">Clear</option>
+                    <option value="slightly">Slightly Blurry</option>
+                    <option value="partially">Partially Blurry</option>
+                    <option value="very">Very Blurry</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="faces-filter">Faces:</label>
+                <select id="faces-filter">
+                    <option value="">All</option>
+                    <option value="yes">Has Faces</option>
+                    <option value="no">No Faces</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <button id="column-selector-btn" class="column-selector-btn">Select Columns</button>
+            </div>
+        </div>
+
+        <!-- Column Selection Modal -->
+        <div id="columnModal" class="modal">
+            <div class="modal-content column-modal">
+                <span class="close" onclick="closeColumnModal()">&times;</span>
+                <h3>Select Columns to Display</h3>
+                <div class="column-checkboxes">
+                    <label><input type="checkbox" value="image" checked disabled> Image</label>
+                    <label><input type="checkbox" value="quality_score" checked> Analysis Score</label>
+                    <label><input type="checkbox" value="visual_score" checked> LLM Score</label>
+                    <label><input type="checkbox" value="sharpness"> Sharpness</label>
+                    <label><input type="checkbox" value="blur_category" checked> Blur</label>
+                    <label><input type="checkbox" value="resolution"> Resolution</label>
+                    <label><input type="checkbox" value="aspect_ratio"> Aspect Ratio</label>
+                    <label><input type="checkbox" value="brightness"> Brightness</label>
+                    <label><input type="checkbox" value="contrast"> Contrast</label>
+                    <label><input type="checkbox" value="dominant_color_percentage"> Dominant Color</label>
+                    <label><input type="checkbox" value="file_size" checked> File Size</label>
+                    <label><input type="checkbox" value="actions" checked disabled> Actions</label>
+                </div>
+                <div class="modal-actions">
+                    <button onclick="applyColumnSelection()">Apply</button>
+                    <button onclick="resetColumnSelection()">Reset to Default</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="imagesTable">
+                <thead>
+                    <tr>
+                        <th class="sortable" data-sort="name" data-column="image">Image</th>
+                        <th class="sortable" data-sort="quality_score" data-column="quality_score">Analysis Score</th>
+                        <th class="sortable" data-sort="visual_score" data-column="visual_score">LLM Score</th>
+                        <th class="sortable" data-sort="sharpness" data-column="sharpness">Sharpness</th>
+                        <th class="sortable" data-sort="blur_category" data-column="blur_category">Blur</th>
+                        <th class="sortable" data-sort="resolution" data-column="resolution">Resolution</th>
+                        <th class="sortable" data-sort="aspect_ratio" data-column="aspect_ratio">Aspect Ratio</th>
+                        <th class="sortable" data-sort="brightness" data-column="brightness">Brightness</th>
+                        <th class="sortable" data-sort="contrast" data-column="contrast">Contrast</th>
+                        <th class="sortable" data-sort="dominant_color_percentage" data-column="dominant_color_percentage">Dominant Color</th>
+                        <th class="sortable" data-sort="file_size" data-column="file_size">File Size</th>
+                        <th data-column="actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                <tr class="main-row" data-quality="8.4"
+                    data-blur="slightly blurry"
+                    data-resolution="9555840"
+                    data-faces="0"
+                    data-search="robot_sitting_on_bench.jpg Humanoid robot with a white head and exposed mechanisms sitting on a wooden bench, holding a flat object. Indoor area with glass window and dry lawn outside. Lighting is even.">
+                    <td class="image-cell" data-column="image">
+                        <div class="image-info">
+                            <img src="images/robot_sitting_on_bench.jpg" alt="" class="thumbnail clickable"
+                                 loading="lazy" onerror="this.style.display='none'"
+                                 onclick="openImageModal('images/robot_sitting_on_bench.jpg', 'robot_sitting_on_bench.jpg', '')">
+                            <div class="image-details">
+                                <strong>robot_sitting_on_bench.jpg</strong>
+                                <small></small>
+                                <div class="visual-description"><div class="visual-name">📝 robot_sitting_on_bench.jpg</div><div class="visual-desc">💬 Humanoid robot with a white head and exposed mechanisms sitting on a wooden bench, holding a flat object. Indoor area with glass window and dry lawn outside. Lighting is even.</div><div class="visual-purpose">🎯 Technology illustration or editorial photo</div><div class="visual-score-basis">⚖️ Image creates a futuristic and slightly unsettling mood due to the humanoid robot. Good focus and color balance. Composition is clear but background is visually flat and uninteresting. Slightly artificial feel to the robot, but image quality remains high. Lighting is adequate but not dramatic.</div><div class="visual-feelings">💭 curiosity, unease, intrigue</div></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td data-column="quality_score"><span class="quality-score quality-high">8.4</span></td>
+                    <td data-column="visual_score"><span class="quality-score quality-high">7.0</span></td>
+                    <td data-column="sharpness">13534.1</td>
+                    <td data-column="blur_category"><span class="blur-category blur-slight">Slightly Blurry</span></td>
+                    <td data-column="resolution">2765x3456</td>
+                    <td data-column="aspect_ratio">0.80</td>
+                    <td data-column="brightness">101</td>
+                    <td data-column="contrast">57.7</td>
+                    <td data-column="dominant_color_percentage">21.5%</td>
+                    <td data-column="file_size">3.4 MB</td>
+                    <td data-column="actions">
+                        <button class="expand-btn" onclick="toggleDetails(0)">▼</button>
+                    </td>
+                </tr>
+            
+
+                <tr class="detail-row" id="detail-0" style="display: none;">
+                    <td colspan="12" class="detail-cell">
+                        <div class="detail-content">
+                            <div class="detail-section">
+                                <h4>Visual Description (LLM Analysis)</h4>
+                                <div class="detail-grid">
+                                    <div><strong>Name:</strong> robot_sitting_on_bench.jpg</div>
+                                    <div><strong>Description:</strong> Humanoid robot with a white head and exposed mechanisms sitting on a wooden bench, holding a flat object. Indoor area with glass window and dry lawn outside. Lighting is even.</div>
+                                    <div><strong>Purpose:</strong> Technology illustration or editorial photo</div>
+                                    <div><strong>Score Basis:</strong> Image creates a futuristic and slightly unsettling mood due to the humanoid robot. Good focus and color balance. Composition is clear but background is visually flat and uninteresting. Slightly artificial feel to the robot, but image quality remains high. Lighting is adequate but not dramatic.</div>
+                                    <div><strong>Image Quality:</strong> 8</div>
+                                    
+                                </div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Technical Analysis</h4>
+                                <div class="detail-grid">
+                                    <div><strong>Edge Density:</strong> 0.256</div>
+                                    <div><strong>Entropy:</strong> 7.60</div>
+                                    <div><strong>Color Std Dev:</strong> 57.4</div>
+                                    <div><strong>Motion Blur:</strong> 0.75</div>
+                                    <div><strong>Monochrome:</strong> No</div>
+                                    <div><strong>Blur Ratio:</strong> 23.2%</div>
+                                    <div><strong>Overall Blur:</strong> No</div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            
+                </tbody>
+            </table>
+        </div>
+
+        <div class="analytics-summary">
+            <h3>Analytics Summary</h3>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h4>Quality Distribution</h4>
+                    <div id="qualityChart"></div>
+                </div>
+                <div class="summary-card">
+                    <h4>Blur Categories</h4>
+                    <div id="blurChart"></div>
+                </div>
+                <div class="summary-card">
+                    <h4>Face Detection</h4>
+                    <div id="faceChart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeImageModal()">&times;</span>
+            <img id="modalImage" src="" alt="">
+            <div id="modalImageInfo">
+                <h3 id="modalImageName"></h3>
+                <p id="modalImageAlt"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const imagesData = [
+  {
+    "name": "robot_sitting_on_bench.jpg",
+    "src": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
+    "alt": "",
+    "desc": "Uppt\u00e4ck AI-kurser utformade f\u00f6r b\u00e5de nyb\u00f6rjare och experter\n\n\n\nLevay Multimedia erbjuder insiktsfulla AI-utbildningar som st\u00e4rker dina f\u00e4rdigheter och driver din utveckling fram\u00e5t. Lita p\u00e5 v\u00e5r expertis f\u00f6r att f\u00f6rvandla dina id\u00e9er till verklighet.\n\n\n\n\nL\u00e4s mer",
+    "width": 2765,
+    "height": 3456,
+    "format": "",
+    "score": 3,
+    "file_exists": true,
+    "file_size": 3594899,
+    "visual_name": "robot_sitting_on_bench.jpg",
+    "visual_description": "Humanoid robot with a white head and exposed mechanisms sitting on a wooden bench, holding a flat object. Indoor area with glass window and dry lawn outside. Lighting is even.",
+    "visual_purpose": "Technology illustration or editorial photo",
+    "visual_score_basis": "Image creates a futuristic and slightly unsettling mood due to the humanoid robot. Good focus and color balance. Composition is clear but background is visually flat and uninteresting. Slightly artificial feel to the robot, but image quality remains high. Lighting is adequate but not dramatic.",
+    "visual_image_quality": 8,
+    "visual_score": 7,
+    "visual_faces": 0,
+    "visual_feelings": [
+      "curiosity",
+      "unease",
+      "intrigue"
+    ],
+    "has_faces": false,
+    "sharpness": 13534.14,
+    "quality_score": 8.41,
+    "blur_ratio": 23.21,
+    "blur_category": "Slightly Blurry",
+    "overall_blur": false,
+    "brightness": 100.89,
+    "contrast": 57.74,
+    "edge_density": 0.2555,
+    "color_std_dev": 57.42,
+    "entropy": 7.6,
+    "motion_blur": 0.75,
+    "dominant_color_percentage": 21.46,
+    "is_monochrome": false,
+    "aspect_ratio": 0.8
+  }
+];
+    </script>
+</body>
+</html>

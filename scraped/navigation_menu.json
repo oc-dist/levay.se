@@ -1,0 +1,45 @@
+{
+  "items": [
+    {
+      "src": "../images/ext-custom-logo-1749102053958.webp",
+      "alt": "",
+      "href": "index"
+    },
+    {
+      "text": "Levay Multimedia",
+      "href": "index"
+    },
+    {
+      "text": "Om oss",
+      "href": "index"
+    },
+    {
+      "text": "Funktioner",
+      "href": "index"
+    },
+    {
+      "text": "Kundomdömen",
+      "href": "index"
+    },
+    {
+      "text": "Tjänster",
+      "href": "index"
+    },
+    {
+      "text": "Kontakt",
+      "href": "index"
+    },
+    {
+      "text": "Instagram",
+      "href": "https://www.instagram.com/"
+    },
+    {
+      "text": "Facebook",
+      "href": "https://www.facebook.com/"
+    },
+    {
+      "text": "X",
+      "href": "https://x.com/"
+    }
+  ]
+}

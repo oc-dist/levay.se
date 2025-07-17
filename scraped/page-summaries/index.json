@@ -1,0 +1,40 @@
+{
+  "name": "Levay Multimedia",
+  "description": "Levay Multimedia är en utbildningsverksamhet med fokus på att erbjuda insiktsfulla och tillgängliga kurser inom artificiell intelligens. Vi riktar oss till allt från nybörjare till experter och erbjuder både teoretiska och praktiska AI-kurser och tjänster, samt support och nätverkande. Syftet med vår webbplats är att presentera våra utbildningar, dela kundomdömen, och underlätta kontakten med både nya och befintliga kunder.",
+  "feelings": [
+    "Förtroende",
+    "Inspiration",
+    "Framåttänkande",
+    "Professionalism",
+    "Tillgänglighet",
+    "Trygghet"
+  ],
+  "proposed_colours": {
+    "colours": [
+      {
+        "h": 350.0,
+        "s": 70.0,
+        "l": 52.0,
+        "comment": "En varm magenta/röd ton (i linje med nuvarande logotyp) skapar energi, framtidstro och distinkt identitet för AI och utbildning."
+      },
+      {
+        "h": 220.0,
+        "s": 15.0,
+        "l": 12.0,
+        "comment": "En mycket mörkblå nästan svart - bättre än helt svart, ger djup och grundar sidan, fungerar utmärkt för text."
+      },
+      {
+        "h": 0.0,
+        "s": 0.0,
+        "l": 98.0,
+        "comment": "Mycket ljus gråvit bakgrund – bevarar tydlighet och modernitet, samtidigt mer behagligt för ögat än helt vit bakgrund."
+      },
+      {
+        "h": 137.0,
+        "s": 25.0,
+        "l": 42.0,
+        "comment": "En dämpad teal/grön accent för att bryta av och lyfta viktiga element som knappar, länkar eller call-to-action."
+      }
+    ]
+  }
+}

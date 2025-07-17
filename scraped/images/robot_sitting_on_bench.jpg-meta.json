@@ -1,0 +1,42 @@
+{
+  "src": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
+  "name": null,
+  "alt": "",
+  "desc": "Upptäck AI-kurser utformade för både nybörjare och experter\n\n\n\nLevay Multimedia erbjuder insiktsfulla AI-utbildningar som stärker dina färdigheter och driver din utveckling framåt. Lita på vår expertis för att förvandla dina idéer till verklighet.\n\n\n\n\nLäs mer",
+  "score": 3,
+  "type": "image",
+  "group_id": 1,
+  "format": null,
+  "width": 2765,
+  "height": 3456,
+  "visual_description": {
+    "name": "robot_sitting_on_bench.jpg",
+    "description": "Humanoid robot with a white head and exposed mechanisms sitting on a wooden bench, holding a flat object. Indoor area with glass window and dry lawn outside. Lighting is even.",
+    "score_basis": "Image creates a futuristic and slightly unsettling mood due to the humanoid robot. Good focus and color balance. Composition is clear but background is visually flat and uninteresting. Slightly artificial feel to the robot, but image quality remains high. Lighting is adequate but not dramatic.",
+    "purpose": "Technology illustration or editorial photo",
+    "image_quality": 8,
+    "faces": 0,
+    "score": 7,
+    "feelings": [
+      "curiosity",
+      "unease",
+      "intrigue"
+    ]
+  },
+  "analysis": {
+    "sharpness": 13534.14,
+    "quality_score": 8.41,
+    "blur_ratio": 23.21,
+    "blur_category": "Slightly Blurry",
+    "overall_blur": false,
+    "brightness": 100.89,
+    "contrast": 57.74,
+    "edge_density": 0.2555,
+    "color_std_dev": 57.42,
+    "entropy": 7.6,
+    "motion_blur": 0.75,
+    "dominant_color_percentage": 21.46,
+    "is_monochrome": false,
+    "aspect_ratio": 0.8
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "internal_links": [
+    {
+      "href": "https://levay.se/",
+      "text": "Hoppa till innehåll",
+      "title": "",
+      "base_domain": "levay.se"
+    },
+    {
+      "href": "https://levay.se",
+      "text": "Levay Multimedia",
+      "title": "",
+      "base_domain": "levay.se"
+    }
+  ],
+  "external_links": [
+    {
+      "href": "https://www.instagram.com/",
+      "text": "Instagram",
+      "title": "",
+      "base_domain": "instagram.com"
+    },
+    {
+      "href": "https://www.facebook.com/",
+      "text": "Facebook",
+      "title": "",
+      "base_domain": "facebook.com"
+    },
+    {
+      "href": "https://x.com/",
+      "text": "X",
+      "title": "",
+      "base_domain": "x.com"
+    }
+  ]
+}
