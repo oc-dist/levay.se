@@ -1,0 +1,26 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript"
+  ],
+  "plugins": ["i18next"],
+  "rules": {
+    "i18next/no-literal-string": [
+      "error",
+      {
+        "markupOnly": true,
+        "ignoreAttribute": ["className", "key", "data-testid", "role", "aria-label", "aria-labelledby", "aria-describedby", "type", "name", "id", "for", "value", "placeholder", "alt", "src", "href", "rel", "target", "method", "action", "width", "height", "viewBox", "xmlns", "d", "fill", "stroke", "strokeWidth", "strokeLinecap", "strokeLinejoin", "strokeDasharray", "strokeDashoffset", "strokeOpacity", "fillOpacity", "opacity", "transform", "clipPath", "mask", "filter"],
+        "ignoreCallee": ["require", "t", "console.log", "console.error", "console.warn", "console.info", "console.debug", "cn", "clsx", "cva"],
+        "ignore": ["^[A-Z_]+$", "^\\d+$", "^[a-z]+$", "^sr-only$", "Close", "Previous", "Next", "More", "Toggle Sidebar", "More pages", "Previous slide", "Next slide"]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["src/components/ui/**/*.tsx"],
+      "rules": {
+        "i18next/no-literal-string": "off"
+      }
+    }
+  ]
+}
