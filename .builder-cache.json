@@ -2,5 +2,6 @@
   "InitStarterRepo",
   "CreatePages",
   "AddImages",
-  "AddTheme"
+  "AddTheme",
+  "SyncGitReposStep"
 ]
