@@ -1,4 +1,6 @@
 [
   "InitStarterRepo",
-  "CreatePages"
+  "CreatePages",
+  "AddImages",
+  "AddTheme"
 ]
